@@ -160,13 +160,13 @@ class Program
         Console.WriteLine($"The average is: {average}");
         Console.WriteLine($"The largest number is: {largest}");
         Console.WriteLine($"The smallest positive number is: {smallest}");
-        
+
         // Fifth Step
         DisplayWelcome();
         string name = PromptUserName();
-        int number = PromptUserNumber();
+        int favoriteNumber = PromptUserNumber();
         PromptUserBirthYear(out int birthYear);
-        int squaredNumber = SquareNumber(number);
+        int squaredNumber = SquareNumber(favoriteNumber);
         DisplayResult(name, squaredNumber, birthYear);
     }
 }
