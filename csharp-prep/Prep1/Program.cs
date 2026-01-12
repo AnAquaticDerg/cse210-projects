@@ -39,7 +39,6 @@ class Program
     }
     static void Main(string[] args)
     {
-    /*
     // First Step
     Console.WriteLine("What is your first name?");
     string first_name = Console.ReadLine();
@@ -161,7 +160,7 @@ class Program
         Console.WriteLine($"The average is: {average}");
         Console.WriteLine($"The largest number is: {largest}");
         Console.WriteLine($"The smallest positive number is: {smallest}");
-        */
+        
         // Fifth Step
         DisplayWelcome();
         string name = PromptUserName();
