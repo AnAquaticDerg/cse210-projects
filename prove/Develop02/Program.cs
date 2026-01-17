@@ -47,6 +47,7 @@ class Program
 
         Console.WriteLine($"\nWelcome {myJournal._name}! What file will we use for saving and loading? (Exclude the file extension)");
         myJournal._filename = Console.ReadLine().ToLower() + ".json";
+        
         myJournal._entries = myJournal.LoadJournal(ref myJournal._filename);
         Console.WriteLine($"Great! \"{myJournal._filename}\" it is!");
 
