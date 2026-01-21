@@ -26,8 +26,7 @@ class Program
 
             Fraction f4 = new Fraction(randomNumerator, randomDenominator);
 
-            Console.WriteLine(f4.GetFractionString());
-            Console.WriteLine(f4.GetDecimalValue());
+            Console.WriteLine($"Fraction {count}: string: {f4.GetFractionString()} Number: {f4.GetDecimalValue()}");
 
             count += 1;
         }
