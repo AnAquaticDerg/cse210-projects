@@ -37,7 +37,7 @@ public class ActivityLog
     }
     public void LoadLog()
     {
-        var jsonLogDict = File.ReadAllText("activity_log.json");
+        string jsonLogDict = File.ReadAllText("activity_log.json");
         Dictionary<string,int> loadedLogDict = JsonSerializer.Deserialize<Dictionary<string,int>>(jsonLogDict);
 
         _activityLog = loadedLogDict;

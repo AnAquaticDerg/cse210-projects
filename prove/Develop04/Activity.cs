@@ -80,7 +80,7 @@ public class Activity
     }
     protected void DisplaySpinner(float durationBase = 5)
     {
-        WriteLineDeluxe();
+        Console.WriteLine();
 
         float duration = durationBase * 1000;
         int i = 0;
