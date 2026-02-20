@@ -1,53 +1,138 @@
+using System.Text.Json.Serialization;
+using static DeluxeConsole;
+[JsonPolymorphic(TypeDiscriminatorPropertyName = "$type")]
+[JsonDerivedType(typeof(Enemy), "enemy")]
+[JsonDerivedType(typeof(Fighter), "fighter")]
+[JsonDerivedType(typeof(Caster), "caster")]
+[JsonDerivedType(typeof(Ranger), "ranger")]
+[JsonDerivedType(typeof(Healer), "healer")]
+
 public class Character
 {
+    [JsonInclude]
     protected string _name;
-    private int _maxHealth;
+    [JsonInclude]
+    protected int _maxHealth;
+    [JsonInclude]
     protected int _currentHealth;
+    [JsonInclude]
     protected int _damage;
+    [JsonInclude]
+    protected int _dodgeProcChance;
+    [JsonInclude]
     protected int _score;
+    [JsonInclude]
     private int _scoreToNextLevel;
-    private int _level;
+    [JsonInclude]
+    protected int _level;
+    protected static Random _random = new Random();
 
-    public Character(string name, int maxHealth, int damage)
+    [JsonConstructor]
+    public Character() {}
+    public Character(string name)
     {
         _name = name;
-        _maxHealth = maxHealth;
-        _currentHealth = maxHealth;
-        _damage = damage;
         _score = 0;
-        _scoreToNextLevel = 100;
-        _level = 0;
+        _scoreToNextLevel = 10;
+        _level = 1;
     }
     
     public virtual int DealDamage()
     {
         return _damage;
     }
-    public virtual void TakeDamage(int damageTaken)
+    public void TakeDamage(int damageTaken)
     {
-        _currentHealth -= damageTaken;
+        int procAttempt = _random.Next(100) + 1;
+        if (procAttempt <= _dodgeProcChance && damageTaken > 0)
+        {
+            WriteLineDeluxe($"{_name} dodged the attack!");
+            return;
+        }
+        else
+        {
+            _currentHealth -= damageTaken;
+
+            if (_currentHealth > _maxHealth)
+            {
+                _currentHealth = _maxHealth;
+            }
+            else if (_currentHealth < 0)
+            {
+                _currentHealth = 0;
+            }
+            if (damageTaken > 0)
+            {
+                WriteLineDeluxe($"{_name} took {damageTaken} damage! They are now on {_currentHealth}/{_maxHealth} HP.");
+            }
+            else if (damageTaken == 0)
+            {
+                WriteLineDeluxe($"{_name} took no damage.");
+            }
+            else
+            {
+                WriteLineDeluxe($"{_name} healed {damageTaken * -1} damage! They are now on {_currentHealth}/{_maxHealth} HP.");
+            }
+        }
+
         if (_currentHealth <= 0)
         {
-            Console.WriteLine($"{_name} got hurt and collapsed.");
+            WriteLineDeluxe($"{_name} got hurt and collapsed.");
         }
     }
+    
+    public string GetName()
+    {
+        return _name;
+    }
+    public bool IsDead()
+    {
+        if (_currentHealth <= 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public void ResetHealth()
+    {
+        _currentHealth = _maxHealth;
+    }
+    
     public void UpdateLevel(int scoreGained)
     {
         _score += scoreGained;
         
+        WriteLineDeluxe();
         while (_score >= _scoreToNextLevel)
         {
             int startingAmount = _score - _scoreToNextLevel;
             _score = startingAmount;
-            _scoreToNextLevel = _scoreToNextLevel + _level * 50;
+            _scoreToNextLevel += 10 + _level * 3;
+
+            _maxHealth += 3 + _random.Next(4);
+            _damage += 1 + _random.Next(4);
+            _dodgeProcChance += _random.Next(4) / 2;
 
             _level++;
-            Console.WriteLine($"{_name} leveled up! They are now level {_level}!");
+            WriteLineDeluxe($"{_name} leveled up! They are now level {_level}!");
         }
     }
-    public void DisplayStats()
+    public virtual void DisplayStats()
     {
-        Console.WriteLine($"Lv {_level} {_name}: {_currentHealth}/{_maxHealth}");
+        if (_currentHealth > 0)
+        {        
+            WriteLineDeluxe($"Lv {_name}: {_currentHealth}/{_maxHealth} HP");
+        }
+        else
+        {
+            WriteLineDeluxe($"Lv {_level} {_name}: {_currentHealth}/{_maxHealth} HP (DOWN)");
+        }
     }
-
+    public void DisplayDetailedStats()
+    {
+        WriteLineDeluxe($"Lv {_level} {GetType()} {_name}: {_maxHealth} HP | {_damage} ATK | {_dodgeProcChance} DGE | {_scoreToNextLevel - _score} XP to next level.");
+    }
 }

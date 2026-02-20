@@ -1,19 +1,16 @@
+using System.Text.Json.Serialization;
+using static DeluxeConsole;
 public class Caster : Character
 {
-    Random _random = new Random();
-
-    public Caster(string name, int maxHealth, int damage) : base(name, maxHealth, damage) {}
-
-    public override void TakeDamage(int damageTaken)
+    [JsonConstructor]
+    public Caster() {}
+    public Caster(string name) : base(name)
     {
-        int procAttempt = _random.Next(100) + 1;
-        if (procAttempt >= 66)
-        {
-            return;
-        }
-        else
-        {
-            _currentHealth -= damageTaken;
-        }
+        _damage = 6;
+        _maxHealth = 16;
+        _currentHealth = _maxHealth;
+        _dodgeProcChance = 66;
     }
+
+    
 }

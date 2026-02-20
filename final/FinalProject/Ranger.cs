@@ -1,31 +1,28 @@
+using System.Text.Json.Serialization;
+using static DeluxeConsole;
 public class Ranger : Character
 {
-    Random _random = new Random();
-
-    public Ranger(string name, int maxHealth, int damage) : base(name, maxHealth, damage) {}
+    [JsonConstructor]
+    public Ranger() {}
+    public Ranger(string name) : base(name)
+    {
+        _damage = 4;
+        _maxHealth = 20;
+        _currentHealth = _maxHealth;
+        _dodgeProcChance = 40;
+    }
 
     public override int DealDamage()
     {
         int procAttempt = _random.Next(100) + 1;
-        if (procAttempt >= 33)
+        if (procAttempt >= 50)
         {
             return _damage;
         }
         else
         {
+            WriteLineDeluxe($"{_name} landed a critical shot and dealt twice as much damage!");
             return _damage * 2;
         }
-    }
-    public override void TakeDamage(int damageTaken)
-    {
-       int procAttempt = _random.Next(100) + 1;
-        if (procAttempt >= 33)
-        {
-            _currentHealth -= damageTaken;
-        }
-        else
-        {
-            return;
-        } 
     }
 }

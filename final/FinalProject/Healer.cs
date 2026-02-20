@@ -1,9 +1,20 @@
+using System.Text.Json.Serialization;
+
 public class Healer : Character
 {
-    public Healer(string name, int maxHealth, int damage) : base(name, maxHealth, damage) {}
+    [JsonConstructor]
+    public Healer() {}
+    public Healer(string name) : base(name)
+    {
+        _damage = 8;
+        _maxHealth = 16;
+        _currentHealth = _maxHealth;
+        _dodgeProcChance = 1;
+    }
 
     public override int DealDamage()
     {
-        return _damage / -2;
+        Console.WriteLine($"{_name} healed {_damage} HP!");
+        return -_damage;
     }
 }
