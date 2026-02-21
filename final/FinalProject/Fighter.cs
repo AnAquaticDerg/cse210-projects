@@ -15,7 +15,15 @@ public class Fighter : Character
 
     public override int DealDamage()
     {
-        int randomCrit = _damage + _random.Next(_damage + _damage / 2);
-        return randomCrit;
+        if (IsDead())
+        {
+            Console.WriteLine($"{_name} is too injured to do anything...");
+            return 0;
+        }
+        else
+        {
+            int randomCrit = _damage + _random.Next(_damage + _damage / 2);
+            return randomCrit;
+        }
     }
 }

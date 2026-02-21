@@ -117,7 +117,7 @@ public class Battlefield
             {
                 WriteLineDeluxe("\nSelect a target.");
                 targetIndex = int.Parse(Console.ReadLine()) - 1;
-            } while (targetIndex > _playerCharacters.Count() - 1 || targetIndex < 0);
+            } while (targetIndex > -_enemies.Count() - 1 || targetIndex < 0);
 
             Enemy target = _enemies[targetIndex];
 

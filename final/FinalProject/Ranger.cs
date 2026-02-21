@@ -14,15 +14,23 @@ public class Ranger : Character
 
     public override int DealDamage()
     {
-        int procAttempt = _random.Next(100) + 1;
-        if (procAttempt >= 50)
+        if (IsDead())
         {
-            return _damage;
+            Console.WriteLine($"{_name} is too injured to do anything...");
+            return 0;
         }
         else
         {
-            WriteLineDeluxe($"{_name} landed a critical shot and dealt twice as much damage!");
-            return _damage * 2;
+            int procAttempt = _random.Next(100) + 1;
+            if (procAttempt >= 50)
+            {
+                return _damage;
+            }
+            else
+            {
+                WriteLineDeluxe($"{_name} landed a critical shot and dealt twice as much damage!");
+                return _damage * 2;
+            }
         }
     }
 }

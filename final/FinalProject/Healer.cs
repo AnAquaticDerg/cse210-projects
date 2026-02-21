@@ -14,7 +14,14 @@ public class Healer : Character
 
     public override int DealDamage()
     {
-        Console.WriteLine($"{_name} healed {_damage} HP!");
-        return -_damage;
+        if (IsDead())
+        {
+            Console.WriteLine($"{_name} is too injured to do anything...");
+            return 0;
+        }
+        else
+        {
+            return -_damage;
+        }
     }
 }

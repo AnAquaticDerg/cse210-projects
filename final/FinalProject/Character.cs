@@ -39,7 +39,15 @@ public class Character
     
     public virtual int DealDamage()
     {
-        return _damage;
+        if (IsDead())
+        {
+            Console.WriteLine($"{_name} is too injured to do anything...");
+            return 0;
+        }
+        else
+        {
+           return _damage;        
+        }
     }
     public void TakeDamage(int damageTaken)
     {
@@ -67,11 +75,11 @@ public class Character
             }
             else if (damageTaken == 0)
             {
-                WriteLineDeluxe($"{_name} took no damage.");
+                WriteLineDeluxe($"{_name} is unaffected.");
             }
             else
             {
-                WriteLineDeluxe($"{_name} healed {damageTaken * -1} damage! They are now on {_currentHealth}/{_maxHealth} HP.");
+                WriteLineDeluxe($"{_name} healed {damageTaken * -1} HP! They are now on {_currentHealth}/{_maxHealth} HP.");
             }
         }
 
@@ -124,7 +132,7 @@ public class Character
     {
         if (_currentHealth > 0)
         {        
-            WriteLineDeluxe($"Lv {_name}: {_currentHealth}/{_maxHealth} HP");
+            WriteLineDeluxe($"Lv {_level} {_name}: {_currentHealth}/{_maxHealth} HP");
         }
         else
         {
