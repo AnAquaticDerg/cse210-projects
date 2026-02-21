@@ -6,10 +6,10 @@ public class Caster : Character
     public Caster() {}
     public Caster(string name) : base(name)
     {
-        _damage = 6;
+        _damage = 8;
         _maxHealth = 16;
         _currentHealth = _maxHealth;
-        _dodgeProcChance = 66;
+        _dodgeProcChance = 80;
     }
 
     

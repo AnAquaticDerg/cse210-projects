@@ -13,11 +13,11 @@ public class Enemy : Character
     public Enemy(string name, int enemyLevel) : base(name)
     {
         _level = enemyLevel;
-        _scoreValue = enemyLevel * 5 + _random.Next(10);
-        _maxHealth = 20 + enemyLevel * 5 + _random.Next(5);
+        _scoreValue = enemyLevel * 10 + _random.Next(10);
+        _maxHealth = 20 + enemyLevel * 7 + _random.Next(5);
         _currentHealth = _maxHealth;
-        _damage = 4 + enemyLevel * 2;
-        _dodgeProcChance = 0 + enemyLevel / 5;
+        _damage = 4 + enemyLevel * 3;
+        _dodgeProcChance = enemyLevel / 5;
     }
 
     public int GetScore()
@@ -26,7 +26,7 @@ public class Enemy : Character
     }
     public override int DealDamage()
     {
-        int randomDamage = 2 +_random.Next(_damage);
+        int randomDamage = _level +_random.Next(_damage - _level);
         return randomDamage;
     }
 

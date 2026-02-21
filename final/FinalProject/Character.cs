@@ -118,11 +118,11 @@ public class Character
         {
             int startingAmount = _score - _scoreToNextLevel;
             _score = startingAmount;
-            _scoreToNextLevel += 10 + _level * 3;
+            _scoreToNextLevel += 5 + _level * 3;
 
             _maxHealth += 3 + _random.Next(4);
-            _damage += 1 + _random.Next(4);
-            _dodgeProcChance += _random.Next(4) / 2;
+            _damage += 1 + _random.Next(3);
+            _dodgeProcChance += _random.Next(5) / 2;
 
             _level++;
             WriteLineDeluxe($"{_name} leveled up! They are now level {_level}!");

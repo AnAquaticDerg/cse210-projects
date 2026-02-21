@@ -42,7 +42,7 @@ public class Battlefield
             if (_status != "won")
             {
                 RunEnemyTurn();
-                DisplaySpinner(2);
+                DisplaySpinner(3);
                 CheckPlayers();
             }
         }

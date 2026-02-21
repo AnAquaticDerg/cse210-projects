@@ -22,7 +22,7 @@ public class Ranger : Character
         else
         {
             int procAttempt = _random.Next(100) + 1;
-            if (procAttempt >= 50)
+            if (procAttempt >= 40)
             {
                 return _damage;
             }
