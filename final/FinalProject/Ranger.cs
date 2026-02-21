@@ -6,7 +6,7 @@ public class Ranger : Character
     public Ranger() {}
     public Ranger(string name) : base(name)
     {
-        _damage = 4;
+        _damage = 6;
         _maxHealth = 20;
         _currentHealth = _maxHealth;
         _dodgeProcChance = 40;
