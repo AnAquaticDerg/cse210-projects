@@ -221,7 +221,7 @@ public class Battlefield
     }
     private void WinBattle()
     {
-        WriteLineDeluxe("\nCongraduations! You won!");
+        WriteLineDeluxe("\nCongratulations! You won!");
         _status = "won";
 
         WriteLineDeluxe($"Each character earned {_totalEncounterScore} XP!");
